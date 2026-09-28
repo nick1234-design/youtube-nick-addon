@@ -1,4 +1,12 @@
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   try {
     const id = req.query.id || "";
 
@@ -9,11 +17,11 @@ export default async function handler(req, res) {
       });
     }
 
-    const videoId = id.replace("yt-", "");
+    const videoId = id.replace("yt-", "").replace(/\.json$/, "");
 
     return res.status(200).json({
       meta: {
-        id: id,
+        id: `yt-${videoId}`,
         type: "movie",
         name: "YouTube Video",
         poster: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
