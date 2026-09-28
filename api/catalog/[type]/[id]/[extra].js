@@ -1,4 +1,12 @@
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   try {
     const apiKey = process.env.YOUTUBE_API_KEY;
 
@@ -15,6 +23,7 @@ export default async function handler(req, res) {
 
     if (typeof extra === "string") {
       const match = extra.match(/search=(.*?)(?:\.json)?$/);
+
       if (match) {
         searchQuery = decodeURIComponent(match[1]);
       }
@@ -48,9 +57,10 @@ export default async function handler(req, res) {
       id: `yt-${item.id.videoId}`,
       type: "movie",
       name: item.snippet.title,
-      poster: item.snippet.thumbnails?.high?.url ||
-              item.snippet.thumbnails?.medium?.url ||
-              item.snippet.thumbnails?.default?.url,
+      poster:
+        item.snippet.thumbnails?.high?.url ||
+        item.snippet.thumbnails?.medium?.url ||
+        item.snippet.thumbnails?.default?.url,
       description: item.snippet.description,
       releaseInfo: item.snippet.publishedAt?.slice(0, 10)
     }));
