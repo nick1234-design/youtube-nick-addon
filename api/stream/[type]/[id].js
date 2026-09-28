@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const videoId = id.replace("yt-", "");
+    const videoId = id.replace("yt-", "").replace(/\.json$/, "");
 
     return res.status(200).json({
       streams: [
