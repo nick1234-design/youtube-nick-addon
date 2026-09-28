@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/catalog/:type/:id/:extra*",
+      "destination": "/api/catalog/:type/:id/:extra*"
+    },
+    {
+      "source": "/catalog/:type/:id",
+      "destination": "/api/catalog/:type/:id"
+    },
+    {
+      "source": "/meta/:type/:id",
+      "destination": "/api/meta/:type/:id"
+    },
+    {
+      "source": "/stream/:type/:id",
+      "destination": "/api/stream/:type/:id"
+    }
+  ]
+}
