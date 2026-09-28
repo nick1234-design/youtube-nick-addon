@@ -1,0 +1,12 @@
+{
+  "name": "youtube-nick-addon",
+  "version": "1.0.0",
+  "description": "YouTube search addon for Stremio",
+  "main": "api/manifest.js",
+  "scripts": {
+    "start": "node api/manifest.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
+}
