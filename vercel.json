@@ -20,6 +20,10 @@
   ],
   "rewrites": [
     {
+      "source": "/catalog/:type/:id.json",
+      "destination": "/api/catalog/:type/:id"
+    },
+    {
       "source": "/catalog/:type/:id/:extra*",
       "destination": "/api/catalog/:type/:id/:extra*"
     },
