@@ -19,15 +19,24 @@ export default async function handler(req, res) {
 
     const videoId = id.replace("yt-", "").replace(/\.json$/, "");
 
-    return res.status(200).json({
-      streams: [
-        {
-          name: "YouTube",
-          title: "Watch on YouTube",
-          ytId: videoId
-        }
-      ]
-    });
+if (!/^[\w-]{11}$/.test(videoId)) {
+  return res.status(400).json({ streams: [], error: "Invalid video ID." });
+}
+
+return res.status(200).json({
+  streams: [
+    {
+      name: "YouTube",
+      title: "Open in YouTube app (best for live)",
+      externalUrl: `https://www.youtube.com/watch?v=${videoId}`
+    },
+    {
+      name: "YouTube",
+      title: "Play in Stremio",
+      ytId: videoId
+    }
+  ]
+});
 
   } catch (error) {
     return res.status(500).json({
